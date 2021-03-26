@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>demo</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            list-style: none;
+            text-decoration: none;
+        }
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .fl{
+            float: left;
+        }
+        .fr{
+            float: right;
+        }
+        body{
+            padding-top: 30px;
+        }
+        /* 头部导航 */
+        .nav{
+            width: 80%;
+            height: 100px;
+            margin: 0 auto;
+            border: 1px solid lightblue;
+        }
+        .nav .logo img{
+            width: 140px;
+            height: 80px;
+        }
+        .nav .search{
+            position: relative;
+            margin: 20px 0 0 128px;
+        }
+        .nav .search input{
+            width: 400px;
+            height: 20px;
+            line-height: 25px;
+            font-size: 13px;
+            padding: 5px;
+        }
+        .nav .search button {
+            width: 50px;
+            height: 34px;
+            border: none;
+            background-color: green;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .nav .shopping {
+            width: 133px;
+            height: 30px;
+            border: 1px solid #c3c3c3;
+            margin: 20px 20px 0 0;
+            font-size: 12px;
+        }
+        .nav .shopping .icon {
+            padding: 3px 0 0 5px;
+        }
+        .nav .shopping span {
+            padding: 7px;
+            color: mediumseagreen;
+        }
+        .nav .shopping button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background-color: orange;
+            color: #fff;
+        }
+        /* 商品主体 */
+        /* 商品分类 */
+        .main{
+            width: 80%;
+            margin: 10px auto;
+        }
+        .main .title {
+            height: 40px;
+            font-size: 13px;
+            line-height: 30px;
+            color: #000;
+            border-bottom: 2px solid green;
+        }
+        .main .title ul{
+            margin: 0 7px;
+        }
+        .main .title ul li{
+            float: left;
+            padding: 5px 10px;
+        }
+        .main .title ul li.active{
+            color: #fff;
+            background-color: green;
+            font-size: 14px;
+            text-align: center;
+            padding: 5px 20px;
+        }
+        .main .content{
+            width: 1026px;
+            margin: 0 auto;
+            height: 270px;
+        }
+        .main .content .left{
+            font-size: 12px;
+            width: 127px;
+        }
+        .main .content .left ul li{
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #eaeaea;
+            border-left: 1px solid #eaeaea;
+            text-align: center;
+        }
+        .main .content .left ul li img{
+            width: 15px;
+            padding-right: 5px;
+        }
+        .main .content .left ul li a{
+            color: purple;
+        }
+        .main .content .left ul li a:hover{
+            color: green;
+        }
+        .main .content .right{
+            width: 180px;
+            height: 246px;
+            font-size: 0;
+        }
+        .main .content .right img{
+            width: 180px;
+            height: 123px;
+        }
+        /* 海鲜水产 */
+        .bottom{
+            width: 80%;
+            margin: 10px auto;
+        }
+        .bottom .title {
+            height: 35px;
+            font-size: 13px;
+            line-height: 30px;
+            color: #000;
+            border-bottom: 2px solid green;
+        }
+        .bottom .title ul{
+            margin: 0 7px;
+        }
+        .bottom .title ul li{
+            float: left;
+            padding: 5px 10px;
+        }
+        .bottom .title ul li.active{
+            color: green;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+        }
+        .bottom .title a {
+            display: inline-block;
+            float: right;
+            line-height: 40px;
+            color: purple;
+        }
+        .bottom .imgs{
+            margin: 0 auto;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        .bottom .imgs li{
+            float: left;
+            width: 209px;
+            border-right: 1px solid #c3c3c3;
+            border-bottom: 1px solid #c3c3c3;
+            text-align: center;
+        }
+        .bottom .imgs li.active{
+            background-color: lightblue;
+        }
+        .bottom .imgs li span.tit{
+            display: block;
+            font-size: 13px;
+            line-height: 45px;
+        }
+        .bottom .imgs li span.sale {
+            display: block;
+            color: red;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+    </style>
+  </head>
+  <body>
+      <!-- 头部导航 -->
+      <div class="nav clearfix">
+          <div class="logo fl">
+              <img src="./images/4.jpg" alt="">
+          </div>
+          <div class="search fl">
+              <input type="text" name="search" placeholder="搜索">
+              <button>搜素</button>
+          </div>
+          <div class="shopping fr">
+              <div class="icon fl">
+                  <img src="./images/shop.png" width="24px">
+              </div>
+              <span class="fl">我的购物车</span>
+              <button class="fr">0</button>
+          </div>
+      </div>
+      <!-- 商品主体 -->
+      <div class="main">
+          <div class="title">
+              <ul class="clearfix">
+                  <li class="active">全部商品分类</li>
+                  <li>首页</li>
+                  <li>|</li>
+                  <li>手机生鲜</li>
+                  <li>|</li>
+                  <li>抽奖</li>
+              </ul>
+          </div>
+          <div class="content clearfix">
+              <div class="left fl">
+                  <ul>
+                      <li><img src="./images/fr1.png" alt=""><a href="1">新鲜水果</a></li>
+                      <li><img src="./images/fr2.png" alt=""><a href="2">新鲜水果</a></li>
+                      <li><img src="./images/fr3.png" alt=""><a href="3">新鲜水果</a></li>
+                      <li><img src="./images/fr4.png" alt=""><a href="4">新鲜水果</a></li>
+                      <li><img src="./images/fr5.png" alt=""><a href="5">新鲜水果</a></li>
+                      <li><img src="./images/fr6.png" alt=""><a href="6">新鲜水果</a></li>
+                  </ul>
+              </div>
+              <div class="right fr">
+                  <img src="./images/3.jpg">
+                  <img src="./images/4.jpg">
+              </div>
+              <div class="inner">
+                  <img src="./images/2.jpg" width="719px" height="246px">
+              </div>
+          </div>
+      </div>
+      <div class="bottom">
+          <div class="title clearfix">
+            <ul class="fl">
+                <li class="active">海鲜水产</li>
+                <li>|</li>
+                <li>深海鳗鱼</li>
+                <li>帝王蟹</li>
+            </ul>
+            <a href="more">查看更多>></a>
+          </div>
+          <div class="imgs clearfix">
+              <li class="active">
+                  <span class="tit">基围虾</span>
+                  <img src="./images/3.jpg" width="130px" height="130px">
+                  <span class="sale">￥39.9</span>
+              </li>
+              <li>
+                  <span class="tit">基围虾</span>
+                  <img src="./images/4.jpg" width="130px" height="130px">
+                  <span class="sale">￥39.9</span>
+              </li>
+              <li>
+                  <span class="tit">基围虾</span>
+                  <img src="./images/4.jpg" width="130px" height="130px">
+                  <span class="sale">￥39.9</span>
+              </li>
+              <li>
+                  <span class="tit">基围虾</span>
+                  <img src="./images/4.jpg" width="130px" height="130px">
+                  <span class="sale">￥39.9</span>
+              </li>
+              <li>
+                  <span class="tit">基围虾</span>
+                  <img src="./images/4.jpg" width="130px" height="130px">
+                  <span class="sale">￥39.9</span>
+              </li>
+          </div>
+      </div>
+  </body>
+</html>  

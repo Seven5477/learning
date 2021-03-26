@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>练习</title>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        list-style: none;
+        text-decoration: none;
+    }
+    .inner{
+        width: 295px;
+        height: 150px;
+        margin: 10px auto;
+        background-color: black;
+    }
+    .show{
+        position: relative;
+        top: 20%;
+        text-align: center;
+    }
+    input[type="text"]{
+        text-align: center;
+        color: #000;
+        width: 40px;
+        height: 20px;
+        border: 2px solid #b4b4b4;
+    }
+    label{
+        color: #fff;
+        vertical-align: middle;
+        margin: 0 10px;
+    }
+    button {
+        width: 280px;
+        height: 40px;
+        margin: 60px 10px;
+        background-color: #ffc107;
+    }
+</style>
+</head>
+<body>
+    <div class="inner">
+        <div  class="show">
+            <input type="text"><label>分钟</label>
+            <input type="text"><label>秒</label>
+        </div>
+        <button>启动</button>
+    </div>
+<script type="text/javascript">
+
+var Min = document.getElementsByTagName("input")[0],
+    Sec = document.getElementsByTagName("input")[1],
+    btn = document.getElementsByTagName("button")[0],
+    seconds = 100,
+    isClick = false,
+    timer;
+    Min.value = "1";
+    Sec.value = "40";
+
+btn.onclick = function () {
+    if(isClick){
+        clearInterval(timer);
+        btn.innerHTML = "启动";
+        btn.style.backgroundColor = "#ffc107";
+        isClick = false;
+    }else{
+        timer = setInterval(updatetime, 1000);
+        btn.innerHTML = "取消";
+        btn.style.backgroundColor = "#ff5722";
+        isClick = true;
+    }
+}
+function updatetime() {
+    seconds--;
+    Min.value = parseInt(seconds / 60);
+    Sec.value = parseInt(seconds % 60);
+    if(seconds <= 0) {
+        clearInterval(timer);
+    }
+}
+
+</script>
+</body>
+</html>

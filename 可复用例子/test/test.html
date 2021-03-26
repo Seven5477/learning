@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../reset.min.css">
+    <title>Document</title>
+
+    <style>
+        .container {
+            width: 800px;
+            height: 220px;
+            border: 1px solid red;
+        }
+
+        .container li {
+            float: left;
+            width: 200px;
+            height: 150px;
+            margin: 30px;
+            position: relative;
+        }
+
+        .container li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container li .overlay {
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 150px;
+            background-color: black;
+            opacity: 0.5;
+            overflow: hidden;
+        }
+
+        .container li .overlay p {
+            font-size: 15px;
+            color: #fff;
+            text-align: center;
+            line-height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container clearfix">
+        <ul>
+            <li>
+                <img src="0.jpg" alt="">
+                <div class="overlay">
+                    <p>000</p>
+                </div>
+            </li>
+            <li>
+                <img src="1.jpg" alt="">
+                <div class="overlay">
+                    <p>111</p>
+                </div>
+            </li>
+            <li>
+                <img src="2.jpg" alt="">
+                <div class="overlay">
+                    <p>222</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="../jquery-1.11.3.min.js"></script>
+    <script>
+        let $container = $(".container"),
+            $li = $("li"),
+            $overlay = $(".overlay");
+
+        function move(ev) {
+            let $this = $(this);
+            let curL = ev.pageX - $this.pageX + parseFloat($this.css('left')),
+                curT = ev.pageY - $this.pageY + parseFloat($this.css('top'));
+
+            $this.css({
+                top: curT,
+                left: curL
+            });
+        }
+
+        $container.mouseover(function (ev) {
+            let target = ev.target,
+                $target = $(target);
+            if (target.tagName === 'DIV') {
+                console.log(111)
+                $target.on("mouseenter", move);
+            }
+        });
+    </script>
+</body>
+
+</html>

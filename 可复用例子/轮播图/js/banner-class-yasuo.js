@@ -1,0 +1,1 @@
+"use strict";function demo(r,t){return!0===r?(t.abc=r,t):r}var _extends=Object.assign||function(r){for(var t=1;t<arguments.length;t++){var e=arguments[t];for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&(r[n]=e[n])}return r},_xyz=xyz,a=_xyz.a,b=_xyz.b,c=_xyz.c,n=100,m=200,abc=_extends({},ES7);

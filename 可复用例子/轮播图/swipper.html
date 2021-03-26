@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>插件实现轮播图</title>
+	<!-- IMPORT CSS -->
+	<link rel="stylesheet" href="css/reset.min.css">
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<style>
+		.swiper-container,
+		.swiper-slide,
+		.swiper-slide img {
+			width: 600px;
+			height: 260px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<img src="0.jpg" alt="">
+			</div>
+			<div class="swiper-slide">
+				<img src="1.jpg" alt="">
+			</div>
+			<div class="swiper-slide">
+				<img src="2.jpg" alt="">
+			</div>
+			<div class="swiper-slide">
+				<img src="3.jpg" alt="">
+			</div>
+		</div>
+
+		<!-- 分页器 -->
+		<ul class="swiper-pagination"></ul>
+
+		<!-- 左右按钮 -->
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+	</div>
+
+	<!-- IMPORT JS -->
+	<script src="js/swiper.min.js"></script>
+	<script>
+		new Swiper('.swiper-container', {
+			loop: true,
+			autoplay: {
+				delay: 2000,
+				disableOnInteraction: false
+			},
+			pagination: {
+				el: '.swiper-pagination',
+				type: 'bullets'
+			},
+			effect: "slide",
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			}
+		});
+	</script>
+</body>
+
+</html>

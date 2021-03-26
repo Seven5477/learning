@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>JS中的定时器</title>
+</head>
+
+<body>
+	<script>
+		(function () {
+			//context指向的是新的对象，比如这里的obj
+			function myCall(context) {
+				//this:指向的是当前函数
+				//这里简单处理非引用类型的参数
+				context = context || window;
+				let args = [],
+					result = null;
+				for (let i = 1; i < arguments.length; i++) {
+					args.push(arguments[i]);
+				}
+				context.$fn = this; //添加一个$fn方法，属性值是当前函数
+				result = context.$fn(...args); //执行$fn方法，this变成了context
+				//ES6语法：...args，表示把数组args的每一项展开作为参数传递
+				delete context.$fn; //删除临时添加的方法，不改变context的结构
+				return result;
+			}
+
+			Function.prototype.myCall = myCall;
+		})();
+
+		function add(m, n) {
+			return m + n;
+		}
+		let obj = { name: 'OBJ' };
+		console.log(add.myCall(obj, 1, 5)); // 6
+		/*
+		 * setTimeout
+		 * setInterval
+		 * 定时器的返回值是一个数字，代表当前是第几个定时器
+		 *   + 我们后期可以基于clearTimeout/clearInterval清除定时器
+		 *   + 手动把timer赋值为null，后期基于它的值验证是否存在定时器
+		 *
+		 * 定时器是异步编程的
+		 */
+		/* let timer = null;
+		timer = setTimeout(() => {
+			clearTimeout(timer);
+			timer = null;
+		}, 1000); */
+
+		/* let n = 0;
+		setTimeout(() => {
+			n++;
+			console.log(n); //=>2. 3
+		}, 1000);
+		n += 2;
+		console.log(n); //=>1. 2 */
+
+		/* let n = 0;
+		setTimeout(() => {
+			n++;
+			console.log(n); //=>3
+		}, 0); //=>写零也不是立即执行，而是有一个最小的等待时间，10MS左右
+		n += 2;
+		console.log(n); //=>2 */
+
+		//=>定时器设置一个等待时间，到达时间后不一定执行（如果当前主线程被占用着，所有任务都要等主线程空闲先来，才能被安排执行 =>"因为JS是单线程的"）
+		/* let n = 0;
+		setTimeout(() => {
+			n++;
+			console.log(n); //=>3
+		}, 0);
+		console.time('AA');
+		for (let i = 0; i < 90000000; i++) {}
+		console.timeEnd('AA');
+		n += 2;
+		console.log(n);//=>2  */
+
+		/* let n = 0;
+		setTimeout(() => {
+			n++;
+			console.log(n); //=>没有执行，主线程被死循环给牵绊住了
+		}, 0);
+		n += 2;
+		console.log(n); //=>2
+		while (1 === 1) {
+
+		} */
+
+
+		/* let n = 0;
+		setTimeout(() => {
+			n++;
+			console.log(n); //=>4. 6
+		}, 500);
+		setTimeout(() => {
+			n += 2;
+			console.log(n); //=>2. 2
+		}, 50);
+		//=>约等于160ms
+		for (let i = 0; i < 90000000; i++) {}
+		setTimeout(() => {
+			n += 3;
+			console.log(n); //=>3. 5
+		}, 20);
+		console.log(n);//=>1. 0 */
+
+		/* let n = 0;
+		setTimeout(() => {
+			n++;
+			console.log(n);
+		}, 500);
+		setTimeout(() => {
+			n += 2;
+			console.log(n); //=>2
+			while (1 === 1) {}
+		}, 50);
+		for (let i = 0; i < 90000000; i++) {}
+		console.log(n); //=>0 */
+	</script>
+</body>
+
+</html>

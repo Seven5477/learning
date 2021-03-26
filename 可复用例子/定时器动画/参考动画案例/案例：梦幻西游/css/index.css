@@ -1,0 +1,169 @@
+/* 
+1. 清除默认样式
+        rest.css
+2. 写自己的样式
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width:100%;
+    height: 100%;
+}
+.content{
+    width: 100%;
+    height: 100%;
+    background: url("../image/pic.png") no-repeat;
+    background-size: cover;
+    background-position:top center; 
+}
+
+.content .footer{
+    width:780px;
+    margin:0 auto;
+    padding-top:280px;
+    overflow: hidden;
+}
+
+.content .footer .monkey{
+    float: left;
+    width:200px;
+    height: 180px;
+    background: url("../image/west_01_3ca39fe.png") no-repeat;
+    /* 2. 给指定元素加动画效果 */
+    -webkit-animation:monkey 1s steps(8) infinite;
+    animation:monkey 1s steps(8) infinite;
+    /* steps(n) 步数，用在雪碧图的动画中 */
+}
+.content .footer .pig{
+    float: left;
+    width:200px;
+    height: 180px;
+    background: url("../image/west_02_47bad19.png") no-repeat;
+    -webkit-animation:pig 1s steps(8) infinite;
+    animation:pig 1s steps(8) infinite;
+}
+.content .footer .monk{
+    float: left;
+    width:170px;
+    height: 240px;
+    margin-top:-30px;
+    background: url("../image/west_03_f962447.png") no-repeat;
+    -webkit-animation:monk 1s steps(8) infinite;
+    animation:monk 1s steps(8) infinite;
+}
+.content .footer .sand{
+    float: left;
+    width:210px;
+    height: 200px;
+    background: url("../image/west_04_6516d80.png") no-repeat;
+    -webkit-animation:sand 1s steps(8) infinite;
+    animation:sand 1s steps(8) infinite;
+}
+
+/* 动画需要2步 */
+/* 1. 规定动画效果 */
+/* 2. 给指定元素添加这个动画效果 */
+
+/* 1. 规定动画效果 */
+@-webkit-keyframes monkey{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1600px  0;
+        /* 雪碧图改变背景图片的位置时，值为负值(x轴、y轴)*/
+    }
+}
+@keyframes monkey{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1600px  0;
+    }
+}
+
+@-webkit-keyframes pig{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1600px  0;
+    }
+}
+@keyframes pig{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1600px  0;
+    }
+}
+
+@-webkit-keyframes monk{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1360px  0;
+    }
+}
+@keyframes monk{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1360px  0;
+    }
+}
+
+
+@-webkit-keyframes sand{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1680px  0;
+    }
+}
+@keyframes sand{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position:-1680px  0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

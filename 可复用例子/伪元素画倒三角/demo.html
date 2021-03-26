@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>练习</title>
+</head>
+<style type="text/css">
+    /*使用before伪元素画圆*/
+    .box:before{
+        display:block;
+        content:"钉子";
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: black;
+        color: white;
+        font-weight:bold;
+        text-align: center;
+        line-height: 50px;
+    }
+    /*使用after伪元素画三角*/
+    .box:after{
+        display: block;
+        content: "";
+        width: 0;
+        height: 0;
+        border: 25px solid transparent;
+        border-top: 50px solid black;
+        margin-top: 0px;
+    }
+</style>
+<body>
+    <div class="box"></div>
+</body>
+<script type="text/javascript">
+    
+</script>
+</html>

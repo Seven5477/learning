@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../reset.min.css">
+    <title>京东放大镜</title>
+</head>
+<style>
+    .magnifier {
+        box-sizing: border-box;
+        margin: 20px auto;
+        width: 650px;
+    }
+
+    .magnifier .abbre,
+    .magnifier .origin {
+        float: left;
+    }
+
+    .magnifier .abbre {
+        box-sizing: border-box;
+        width: 300px;
+        height: 300px;
+        position: relative;
+    }
+
+    .magnifier .abbre img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .magnifier .abbre .mark {
+        display: none;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 0, 0, .3);
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: move;
+    }
+
+    .magnifier .origin {
+        display: none;
+        position: relative;
+        box-sizing: border-box;
+        width: 350px;
+        height: 350px;
+        overflow: hidden;
+    }
+
+    .magnifier .origin img {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+</style>
+
+<body>
+    <div class="magnifier clearfix">
+        <!-- 左侧缩略图 -->
+        <div class="abbre">
+            <img src="1.jpg" alt="">
+            <!-- 选中的小盒子 -->
+            <div class="mark"></div>
+        </div>
+        <!-- 右侧放大图 -->
+        <div class="origin">
+            <img src="2.jpg" alt="">
+        </div>
+    </div>
+
+    <script src="../jquery-1.11.3.min.js"></script>
+    <script>
+        let $abbre = $('.abbre'),
+            $mark = $('.mark'),
+            $origin = $('.origin'),
+            $originImg = $origin.find('img');
+            
+        // computeMark方法中需要用到的变量
+        let abbreW = $abbre.outerWidth(),
+            abbreH = $abbre.outerHeight(),
+            markW = $mark.outerWidth(),
+            markH = $mark.outerHeight(),
+            originImgW = $originImg.outerWidth(),
+            originImgH = $originImg.outerHeight(),
+            abbreOffset = $abbre.offset();
+
+        /*左图的小框/左图的可视区 = 右图的可视区/右图真正大小
+        mark /abbre = origin / 大图
+        大图 = origin / mark * abbre
+            = 350 / 100 *300
+            = 1050
+        */
+       //计算出大图的大小设定样式
+		$originImg.css({
+			width: originImgW,
+			height: originImgH
+		});
+
+        // 计算MARK盒子的位置
+        function computeMark(ev) {
+            // 计算mark的位置
+            let markL = ev.pageX - abbreOffset.left - markW / 2,
+                markT = ev.pageY - abbreOffset.top - markH / 2;
+            let minL = 0,
+                minT = 0,
+                maxL = abbreW - markW,
+                maxT = abbreH - markH;
+            markL = markL < minL ? minL : (markL > maxL ? maxL : markL);
+            markT = markT < minT ? minT : (markT > maxT ? maxT : markT);
+            $mark.css({
+                left: markL,
+                top: markT
+            });
+
+            /* 控制大图移动：
+                左边的选择框往右移动，右边的大图就得往左移动才能显示...方向相反
+                mark移动的距离/abbre的width = -大图移动的距离/大图的width
+                大图的距离 = -(mark移动的距离*大图的width)/abbre的width
+            */
+            $originImg.css({
+                left: -(markL * originImgW / abbreW),
+                top: -(markT * originImgH / abbreH)
+            });
+        }
+        // 鼠标进入/离开时显示的变化
+        $abbre.on('mouseenter', function (ev) {
+            $mark.css('display', 'block');
+            $origin.css('display', 'block');
+            computeMark(ev);
+        }).on('mouseleave', function (ev) {
+            $mark.css('display', 'none');
+            $origin.css('display', 'none');
+        }).on('mousemove', function (ev) {
+            computeMark(ev);
+        });
+    </script>
+</body>
+
+</html>

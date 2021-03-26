@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>菜鸟教程(runoob.com)</title>
+<!-- <script type="text/javascript" src="demo.js"></script> -->
+</head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+</style>
+<body>
+	<div style="width: 100px;height: 100px;background-color: red;margin:50px;position: absolute;left: 0;top: 0;"></div>
+<script type="text/javascript">
+
+//将引进的js用异步加载的方式加载，一般用于加载工具类函数
+
+//方法一
+function loadScript(url, callback){
+    var script = document.createElement('script'); 
+    script.type = "text/javascript"; 
+    if(script. readyState){
+        script.onreadystatechange = function() { //IE
+            if(script. readyState =="complete" || script.readyState == "loaded") {
+                eval(callback);  //eval:把字符串当做函数代码执行
+            }
+        }
+    }else{  //Safari chrome firefox opera 
+        script.onload = function() {
+            eval(callback); 
+        }
+    }
+    script.src = url; 
+    document.head.appendChild(script);
+}
+
+//方法二
+//这个方法更好，因为eval不让用
+function loadScript(url, callback){
+    var script = document.createElement('script'); 
+    script.type = "text/javascript"; 
+    if(script. readyState){
+        script.onreadystatechange = function() { //IE
+            if(script. readyState == "complete" || script.readyState == "loaded") {
+                tools[callback](); //json格式的函数调用
+            }
+        }
+    }else{  //Safari chrome firefox opera 
+        script.onload = function() {
+            tools[callback](); 
+        }
+    }
+    script.src = url; 
+    document.head.appendChild(script);
+}
+
+loadScript('demo.js', "test");
+</script>
+
+</body>
+</html>

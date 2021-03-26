@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../reset.min.css"> -->
+    <title>DRAG-拖拽</title>
+</head>
+<style>
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+    .box {
+        box-sizing: border-box;
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        cursor: move;
+    }
+</style>
+
+<body>
+    <div class="box"></div>
+
+    <script>
+        let box = document.querySelector(".box");
+
+        box.onmousedown = down;
+        /*
+        鼠标距离边缘：ev1.pageY - ev1.top
+        ev2.top = ev2.pageY - (ev1.pageY - ev1.top)
+            = ev2.pageY - ev1.pageY + ev1.top
+        ev2.left = ev2.pageX - (ev1.pageX - ev1.left)
+            = ev2.pageX - ev1.pageX + ev1.left
+        */
+        function down(ev) {
+            // 把鼠标的起始位置和盒子的起始位置存为自定义属性
+            this.pageX = ev.pageX;
+            this.pageY = ev.pageY;
+            this.left = this.offsetLeft;
+            this.top = this.offsetTop;
+            // 接下来再给盒子绑定MOVE和UP方法：只有鼠标按下的时候才去绑定移动和抬起
+            // 谷歌的绑定方法：鼠标在document中操作，注意this的处理
+            document.onmousemove = move.bind(this);
+            document.onmouseup = up.bind(this);
+            /*利用DOM2:
+            直接在addEventListener中写move.bind(this)，后面移除的时候不是一个堆内存，所以需要先定义出来
+            this._MOVE = move.bind(this);
+            this._UP = up.bind(this);
+            document.addEventListener('mousemove', this._MOVE);
+            document.addEventListener('mouseup', this._UP);
+            */
+        }
+        function move(ev) {
+            let curT = ev.pageY - this.pageY + this.top,
+                curL = ev.pageX - this.pageX + this.left;
+            // 边界处理
+            let minL = 0,
+                maxL = document.documentElement.clientWidth - this.offsetWidth,
+                minT = 0,
+                maxT = document.documentElement.clientHeight - this.offsetHeight;
+            curL = curL < minL ? minL : (curL > maxL ? maxL : curL);
+            curT = curT < minT ? minT : (curT > maxT ? maxT : curT);
+
+            this.style.left = curL + 'px';
+            this.style.top = curT + 'px';
+        }
+        function up(ev) {
+            // 鼠标抬起，把MOVE和UP都移除掉
+            // 谷歌的解绑方法：
+            document.onmousemove = null;
+            document.onmouseup = null;
+            /*利用DOM2:
+            document.removeEventListener('mousemove', this._MOVE);
+            document.removeEventListener('mouseup', this._UP);
+            */
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../reset.min.css">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        width: 150px;
+        margin: 20px auto;
+    }
+    .newList {
+        width: 100%;
+        border: 1px solid #eee;
+    }
+    li {
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
+        text-align: center;
+        list-style: none;
+        border-bottom: 1px dotted lightblue;
+    }
+    .newBtn{
+        text-align: center;
+        font-size: 13px;
+        width: 40px;
+        margin: 10px 0;
+    }
+</style>
+
+<body>
+    <div class="container clearfix">
+        <div class="newList">
+            <li>我是第1条新闻</li>
+            <li>我是第2条新闻</li>
+            <li>我是第3条新闻</li>
+            <li>我是第4条新闻</li>
+            <li>我是第5条新闻</li>
+        </div>
+        <button class="newBtn">添加</button>
+    </div>
+
+    <script src="../jquery-1.11.3.min.js"></script>
+    <script>
+        let $newList = $('.newList'),
+            $liList = $newList.children('li'),
+            $btn = $('.newBtn'),
+            count = 5;
+
+        $newList.click(function(ev) {
+            let $target = $(ev.target);
+            if(ev.target.tagName === 'LI') {
+                console.log(`我是第${$target.index() + 1}条新闻`);
+            }
+        });
+
+        $btn.click(function() {
+            let str = ``;
+            for(let i = 0; i < 5; i++) {
+                count ++;
+                str += `<li>我是第${count}条新闻</li>`;
+            }
+            $newList.append(str);
+        });
+    </script>
+</body>
+
+</html>

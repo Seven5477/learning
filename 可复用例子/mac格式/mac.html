@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>hangge.com</title>
+</head>
+<script>
+    //mac网络地址验证
+    function check(){
+      var value = document.getElementById("mac").value;
+      var reg=/^[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}$/;
+      if(!reg.test(value)){
+        alert("mac地址不正确！");
+      }else{
+        alert("验证成功!");
+      }
+    }
+</script>
+<body>
+    <input type="text" id="mac" placeholder="mac地址"/>
+    <button type="button" onclick="check()">验证</button>
+</body>
+</html>

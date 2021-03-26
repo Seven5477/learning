@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-2.1.1.min.js"></script>
+</head>
+<style>
+    *{
+        padding: 0;
+        list-style: none;
+        outline: none;
+        color: #000;
+        font-size: 16px;
+    }
+    /* body{
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+    } */
+    .file {
+        color: blue;
+        text-decoration: underline;
+    }
+    #file{
+        display: none;
+    }
+    input{
+        border: 0;
+    }
+    .outer{
+        width: 600px;
+        margin: 20px auto;
+        border: 1px solid black;
+    }
+    tr{
+        height: 50px;
+    }
+    td{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+<script>
+    
+</script>
+<body>
+    <div class="outer">
+        <table>
+            <tr>
+                <td style="border-right: 1px solid;">请选择</td>
+                <td style="border-right: 1px solid;">
+                    <label for="file">
+						<input type="file" name="" id="file" onchange="document.getElementsByClassName('filename')[0].innerText=this.files[0].name">
+                        <!-- <input type="file" name="" id="file" onchange="document.getElementsByClassName('filename')[0].value=this.files[0].name"> -->
+                        <div class="file">选择文件</div>
+                    </label>
+                </td>
+                <td>
+					<div class="filename">未选择任何文件</div>
+                    <!-- <input type="text" class="filename" value="未选择任何文件"> -->
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+       
+        
+    </script>
+</body>
+</html>
+

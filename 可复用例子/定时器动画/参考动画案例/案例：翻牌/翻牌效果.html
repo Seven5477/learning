@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>3D动画</title>
+    <style type="text/css">
+        body, div {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -177.5px;
+            margin-top: -250px;
+            width: 355px;
+            height: 500px;
+            perspective: 1000px;
+        }
+
+        .out_box {
+            position: relative;
+            height: 500px;
+            width: 355px;
+            transform-style: preserve-3d;
+            transition: 0.5s;
+            backface-visibility: hidden;
+        }
+
+        .out_box div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .out_box div.front_box {
+            background: url("puke-back.png") no-repeat;
+            background-size: 100% 100%;
+            z-index: 2;
+        }
+
+        .out_box div.back_box {
+            background: url("puke-k.png") no-repeat;
+            background-size: 100% 100%;
+            z-index: 1;
+            transform: rotateY(180deg);
+        }
+
+        .container:hover .out_box {
+            transform: rotateY(180deg);
+        }
+
+        .container:hover .back_box {
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="out_box">
+        <div class="front_box"></div>
+        <div class="back_box"></div>
+    </div>
+</div>
+</body>
+</html>

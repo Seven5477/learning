@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>复选框（checkbox）全选/全不选/返选</title>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        list-style: none;
+    }
+    .inner{
+        width: 200px;
+        margin: 10px auto;
+    }
+    input[type="text"]{
+        width: 50px;
+    }
+</style>
+</head>
+<body>
+    <div class="inner">
+        <input type="text">
+        <input type="button" value="是否为两位数">
+    </div>
+<script type="text/javascript">
+
+var inputList = document.querySelectorAll("input");
+
+inputList[0].onkeyup = function ()
+{
+    this.value = this.value.replace(/[^\d]/,""); //用空值代替不是数字的输入值
+}
+inputList[1].onclick = function () {
+    if(inputList[0].value == "") {
+        alert("请输入数字！");
+    } 
+    else{
+        alert(/^\d{2}$/.test(parseInt(inputList[0].value)) ? "√ 是两位数" : "这是" + inputList[0].value.length + "位数");
+    }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>练习</title>
+<!-- <script type="text/javascript" src="demo.js"></script> -->
+</head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+        list-style: none;
+	}
+    html,body{
+        height: 100%;
+    }
+    .wrap{
+        height: 0;
+        width: 800px;
+        background-color: #363a45;
+    }
+    .header{
+        width: 100%;
+        height: 65px;
+        color: #fff;
+        text-align: center;
+        font-size: 24px;
+        line-height: 65px;
+        background-color: #44495a;
+    }
+    .title{
+        width: 800px;
+    }
+    .nav .list{
+        margin-bottom: 5px;
+        float: left;
+    }
+    .nav .list h2{
+        width: 200px;
+        font-size: 16px;
+        text-align: center;
+        padding: 15px 0;
+        background-color: #3889d4;
+        color: #fff;
+    }
+    .list h2.on{
+        background-color: #393c4a;
+    }
+    .nav .list li{
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px 0;
+        color: #fff;
+    }
+    .hide{
+        overflow: hidden;
+        height: 0;
+        background: #44495a;
+    }
+</style>
+<body>
+	<div class="wrap">
+        <div class="header">国内各个景点</div>
+        <div class="nav">
+            <ul class="title">
+                <li class="list">
+                    <h2>北京景点</h2>
+                    <ul class="hide">
+                        <li>故宫</li>
+                        <li>圆明园</li>
+                        <li>颐和园</li>
+                        <li>天安门</li>
+                        <li>长城</li>
+                    </ul>
+                </li>
+                <li class="list">
+                    <h2>南京景点</h2>
+                    <ul class="hide">
+                        <li>夫子庙</li>
+                        <li>长江大桥</li>
+                        <li>南京博物院</li>
+                        <li>明孝陵</li>
+                    </ul>
+                </li>
+                <li class="list">
+                    <h2>西安景点</h2>
+                    <ul class="hide">
+                        <li>钟楼</li>
+                        <li>秦皇陵</li>
+                        <li>大唐芙蓉园</li>
+                        <li>华清池</li>
+                    </ul>
+                </li>
+                <li class="list">
+                    <h2>重庆景点</h2>
+                    <ul class="hide">
+                        <li>洪崖洞</li>
+                        <li>重庆仙女山</li>
+                        <li>三峡博物馆</li>
+                        <li>白公馆</li>
+                        <li>丰都鬼城</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+<script type="text/javascript">
+
+var menuList = document.querySelectorAll(".list > h2"),
+    ulList = document.querySelectorAll(".hide"),
+    iconList = document.querySelectorAll('.list i'),
+    lastIndex = 0;
+var menuLen = menuList.length,
+    ulLen = ulList.length,
+    iconLen = iconList.length;
+(function () {
+    for(var i = 0; i < menuLen; i++){
+        menuList[i].index = i;
+        menuList[i].isClick = false;
+        menuList[i].onclick = function () {
+            if(this.isClick) {
+                ulList[this.index].style.height = '0';
+                menuList[this.index].isClick = false;
+            }else{
+                ulList[lastIndex].style.height = '0';
+                ulList[this.index].style.height = '100%';
+                // ulList[this.index].background = 'blue';
+                lastIndex = this.index;
+                menuList[lastIndex].isClick = true;
+            }
+        }
+    }
+})();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #timer{
+        border: 1px solid red;
+        width: 270px;
+        text-align: center;
+        margin: 30px 300px;
+        font-size: 50px;
+    }
+</style>
+<body>
+    <div id="timer"></div>
+
+    <script>
+        function mytimer() {
+            var d = new Date();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+            var ms = String(d.getMilliseconds()).charAt(0);
+
+            h = (h < 10) ? ("0" + h) : h;
+            m = (m < 10) ? ("0" + m) : m;
+            s = (s < 10) ? ("0" + s) : s;
+
+            window.document.getElementById('timer').innerHTML = h + ":" + m + ":" + s + "." + ms;
+
+            setTimeout("mytimer()", 100);
+        }
+        mytimer();
+    </script>
+</body>
+
+</html>

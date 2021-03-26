@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../reset.min.css">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        width: 300px;
+        height: 300px;
+        border: 3px solid red;
+        margin: 50px;
+        position: relative;
+    }
+    .box {
+        padding: 30px;
+        width: 100px;
+        height: 150px;
+        border: 10px solid lightblue;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        font-size: 15px;
+        line-height: 100px;
+        text-align: center;
+        overflow: auto;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="box">盒子</div>
+    </div>
+
+    <script>
+
+        let box = document.getElementsByClassName("box")[0];
+    </script>
+</body>
+
+</html>

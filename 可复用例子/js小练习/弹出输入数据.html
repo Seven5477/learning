@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>练习</title>
+<!-- <script type="text/javascript" src="demo.js"></script> -->
+</head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+        list-style: none;
+	}
+    button{
+        padding: 3px;
+        text-align: center;
+    }
+    .inner{
+        width: 500px;
+        margin: 0 auto;
+    }
+    input{
+        display: block;
+        margin: 10px auto;
+        height: 20px;
+    }
+</style>
+<body>
+    <div class="inner">
+        <input type="text" value="四川省">
+        <input type="text" value="绵阳市">
+        <input type="button" value="传参">
+    </div>
+<script type="text/javascript">
+
+var inputList = document.querySelectorAll("input");
+
+inputList[2].onclick = function () {
+    for (var i = 0; i < inputList.length-1; i++) {
+        alert(inputList[i].value);
+    }
+}
+
+
+</script>
+
+</body>
+</html>

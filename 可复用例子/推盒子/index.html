@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../reset.min.css">
+    <title>Document</title>
+</head>
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    .container {
+        width: 400px;
+        height: 400px;
+        box-sizing: border-box;
+        background-color: lightblue;
+        position: relative;
+        margin: 20px auto;
+    }
+
+    .container .box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+        transition: .3s linear;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+    </div>
+
+    <script src="../jquery-1.11.3.min.js"></script>
+    <script>
+        let $container = $('.container'),
+            $box = $container.children('.box');
+        $(document).on('keydown keypress', function (ev) {
+            let code = ev.keyCode,
+                T = parseFloat($box.css('top')),
+                L = parseFloat($box.css('left')),
+                step = 30;
+            // 左上右下按键的处理
+            switch (code) {
+                case 37:
+                    L -= step;
+                    break;
+                case 38:
+                    T -= step;
+                    break;
+                case 39:
+                    L += step;
+                    break;
+                case 40:
+                    T += step;
+                    break;
+            }
+            // 边界判断
+            let minL = 0,
+                minT = 0,
+                maxT = $container.outerHeight() - $box.outerHeight(),
+                maxL = $container.outerWidth() - $box.outerWidth();
+            L = L < minL ? minL : (L > maxL ? maxL : L);
+			T = T < minT ? minT : (T > maxT ? maxT : T);
+            $box.css({
+                top: T,
+                left: L
+            });
+        });
+    </script>
+</body>
+
+</html>

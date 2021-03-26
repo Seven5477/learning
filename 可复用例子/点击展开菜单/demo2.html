@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>练习</title>
+</head>
+<style type="text/css">
+    ul,li{
+        margin:0; 
+        padding:0; 
+        list-style:none; 
+    }
+    .container{
+        margin: 50px;
+        width: 280px;
+        height: 40px;
+        line-height: 40px;
+        outline: none;
+        border: 1px solid;
+        text-align: left;
+        padding-left: 10px;
+        background-color: red;
+        font-family: 宋体;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .title{
+        color: #fff;
+    }
+    .select{
+        display: inline-block;
+        background-color: #fff;
+        width: 200px;
+        height: 30px;
+        font-size: 17px;
+        color: #9e9e9e;
+        position: relative;
+        line-height: 30px;
+        text-indent: 15px;
+    }
+    .select i.down{
+        position: absolute;
+        right: 7px;
+        top: 10px;
+        border: 7px solid transparent;
+        border-top: 9px solid black;
+    }
+    .select i.up{
+        position: absolute;
+        right: 7px;
+        top: 3px;
+        border: 7px solid transparent;
+        border-bottom: 9px solid black;
+    }
+    .option{
+        /* 280+10*/
+        width: 290px;
+        text-indent: 90px;
+        border: 1px solid #9e9e9e;
+        border-top: none;
+        border-bottom: none;
+        position: absolute;
+        top: 40px;
+        left: -1px;
+        display: none;
+    }
+    .option li{
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px solid #9e9e9e;
+        font-size: 17px;
+        cursor: pointer;
+    }
+    .option li:hover{
+        background-color: lightblue;
+        color: #fff;
+        font-weight: 600;
+    }
+</style>
+<body>
+    <div class="container">
+        <span class="title">地址：</span>
+        <span class="select">朝阳区<i class="down"></i></span>
+        <ul class="option">
+            <li><span>朝阳区</span></li>
+            <li><span>海定区</span></li>
+            <li><span>东城区</span></li>
+            <li><span>丰台区</span></li>
+            <li><span>石景山区</span></li>
+        </ul>
+    </div>
+</body>
+<script>
+    var i = document.getElementsByTagName("i")[0],
+        option = document.getElementsByClassName("option")[0];
+    i.isClick = false;
+    i.onclick = function () {
+        if(this.isClick) {
+            option.style.display = "none";
+            this.className = "down";
+            this.isClick = false;
+        }
+        else {
+            option.style.display = "block";
+            this.className = "up";
+            this.isClick = true;
+        }
+    }
+</script>
+</html>
+
+<!-- 
+border
+background: url(xxx) right;
+border-radius:50% /100% 100% 0 0;
+transform
+transform:scaleY(1.3) perspective(.5em) rotateX(5deg);
+transform-origin: bottom;
+box-shadow: 0 .15em white inset;
+
+
+ -->

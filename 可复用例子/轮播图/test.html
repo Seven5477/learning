@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>无缝轮播图</title>
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+
+    #container {
+        position: relative;
+        /*轮播图容器的宽高*/
+        width: 500px;
+        height: 260px;
+        margin: 20px auto;
+        overflow: hidden;
+        /*溢出隐藏：只显示一张图片*/
+    }
+
+    #container .wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        /*每张图片的宽度和轮播图容器的宽度相等，
+        整个图片层长度：500*5=2500，由于克隆了一张，多加一张宽度*/
+        width: 3000px;
+        height: 100%;
+    }
+
+    #container .wrapper li {
+        width: 500px;
+        height: 100%;
+        float: left;
+    }
+
+    #container .wrapper li img {
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        /*去掉未浮动时图片间的上下空隙*/
+    }
+
+    #container .btnLeft,
+    #container .btnRight {
+        display: none;
+        z-index: 999;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+        background-color: #9E9E9E;
+        border-radius: 20%;
+        opacity: 60%;
+        font-size: 20px;
+        color: #673ab7;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    #container .btnLeft {
+        left: 0;
+    }
+
+    #container .btnRight {
+        right: 0;
+    }
+
+    #container .btnLeft:hover,
+    #container .btnRight:hover {
+        opacity: 70%;
+        cursor: pointer;
+    }
+
+    /* 鼠标滑过图片的时候显示按钮 */
+    #container:hover .btnLeft,
+    #container:hover .btnRight {
+        display: block;
+    }
+
+    /*圆点层*/
+    #container .dots {
+        background: rgba(0, 0, 0, .3);
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-50%);
+        z-index: 999;
+        padding: 4px;
+        border-radius: 24px;
+    }
+
+    #container .dots li {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #9e9e9e;
+        float: left;
+        /*可以使用行块盒*/
+        /*display: inline-block;*/
+        margin: 0 5px;
+        cursor: pointer;
+    }
+
+    #container .dots li.active {
+        background-color: #c74b42;
+    }
+
+    .clearfix::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+</style>
+
+<body>
+    <!-- 实现轮播图的容器 -->
+    <div id="container">
+        <!-- 存放全部图片的容器 -->
+        <div class="wrapper">
+            <!-- LI: 每张图片 -->
+            <li><img src="0.jpg"></li>
+            <li><img src="1.jpg"></li>
+            <li><img src="2.jpg"></li>
+            <li><img src="3.jpg"></li>
+            <li><img src="4.jpg"></li>
+            <!-- 克隆到末尾 -->
+            <li><img src="0.jpg"></li>
+        </div>
+
+        <div class="btnLeft">&lt;</div>
+        <div class="btnRight">&gt;</div>
+        <!-- 分页器：圆点 -->
+        <div class="dots">
+            <ul class="clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script src="jquery-1.11.3.min.js"></script>
+    <script src="test.js"></script>
+
+</body>
+
+</html>

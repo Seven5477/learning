@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>练习</title>
+</head>
+<style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    a{
+        text-decoration: none;
+    }
+    input{
+        outline: none;
+    }
+    .choose{
+        margin: 20px 50px;
+    }
+    .choose .radio{
+        padding-left: 20px;
+    }
+    .radio i{
+        width: 12px;
+        height: 12px;
+        border: 0.5px solid #999;
+        cursor: pointer;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .radio input{
+        display: none;
+    }
+    .radio input:checked+i{
+        border-color: lightblue;
+    }
+    .radio input:checked+i::after{
+        content: "";
+        display: block;
+        width: 7px;
+        height: 7px;
+        background: lightblue;
+        margin-left: 2.5px;
+        margin-top: 2.5px;
+        border-radius: 50%;
+    }
+
+    .rule {
+        margin: 20px 70px;
+    }
+    .checkbox i{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 0.5px solid #ccc;
+        cursor: pointer;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+    .checkbox input{
+        display: none;
+    }
+
+    .checkbox input:checked+i{
+        border-color: lightblue;
+    }
+    .checkbox input:checked+i::after{
+        display: block;
+        content: "\2714";
+        text-align: center;
+        border-radius: 50%;
+        background: lightblue;
+        color: #fff;
+        font-size: 15px;
+        padding-right: 3px;
+        vertical-align: middle;
+    }
+
+
+</style>
+<body>
+    <div class="choose">
+        <label class="radio">黑名单模式
+            <input type="radio" name="mode" value="1">
+            <i></i>
+        </label>
+        <label class="radio">白名单模式
+            <input type="radio" name="mode" value="2">
+            <i></i>
+        </label>
+    </div>
+    <div class="rule">
+        <label class="checkbox">
+            <input type="checkbox"/>
+            <i></i>
+            <span>我已同意
+                <a href="#">《用户使用协议》</a>和
+                <a href="#">《隐私政策》</a>
+            </span>
+        </label>
+    </div>
+</body>
+</html>

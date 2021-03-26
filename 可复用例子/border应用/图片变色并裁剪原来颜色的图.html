@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style>
+.box {
+  margin: 40px;
+  width: 40px;
+  height: 40px;
+  background-color: lightblue;
+  position: relative;
+  font-size: 24px;
+  overflow: hidden;
+}
+.cor {
+  position: absolute;
+  left: -40px;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border: 20px solid transparent;
+  border-right-color: #fff;
+}
+img {
+    filter: drop-shadow(40px 0 blue);
+    position: relative;
+    left: -40px;
+}
+</style>
+</head>
+<body>
+  <div class="box">
+    <img src="7.jpg" alt="">
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        button {
+            width: 50px;
+            height: 30px;
+            background-color: lightblue;
+            outline: none;
+            border: none;
+            position: absolute;
+            top: 20px;
+            right: 50px;
+        }
+
+        .outer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            /* display: none; */
+        }
+
+        .inner {
+            width: 300px;
+            height: 300px;
+            border: 4px solid #f90;
+            position: absolute;
+            background: #fff;
+            /* display: none; */
+        }
+
+        .head {
+            width: 100%;
+            height: 50px;
+            background: lightblue;
+        }
+
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button>登录</button>
+    <div class="outer">
+        <div class="inner">
+            <div class="head">
+                <span class="close">X</span>
+            </div>
+            <div class="main"></div>
+        </div>
+    </div>
+
+    <script src="../jquery-1.11.3.min.js"></script>
+    <script src="drag-plugin.js"></script>
+    <!-- <script>
+        let $outer = $('.outer'),
+            $inner = $('.inner'),
+            $head = $('.head'),
+            $close = $('.close'),
+            $button = $('button'),
+            $document = $(document);
+
+        $button.click(function() {
+            $outer.css('display', 'block');
+            $inner.css('display', 'block');
+
+            // 让盒子居中
+            $inner.css({
+                left: ($(window).outerWidth() - $inner.outerWidth()) / 2,
+                top: ($(window).outerHeight() - $inner.outerHeight()) / 2
+
+            });
+        });
+        $close.click(function() {
+            $outer.css('display', 'none');
+            $inner.css('display', 'none');
+        });
+
+        // $head.on('mousedown', down);
+        $head.on('mousedown', down.bind($inner.get(0)));
+        function down(ev) {
+            let $this = $(this);
+			this.startX = ev.pageX;
+			this.startY = ev.pageY;
+			this.startL = parseFloat($this.css('left'));
+			this.startT = parseFloat($this.css('top'));
+			//=>把执行BIND处理后的函数存储到盒子的自定义属性上，绑定的时候绑定存储的这个方法，移除的时候也基于自定义属性获取到这个方法移除
+			this._MOVE = move.bind(this);
+			this._UP = up.bind(this);
+			$document.on('mousemove', this._MOVE);
+			$document.on('mouseup', this._UP);
+		}
+
+		function move(ev) {
+            let $this = $(this);
+			let curL = ev.pageX - this.startX + this.startL,
+				curT = ev.pageY - this.startY + this.startT;
+			let minL = 0,
+				minT = 0,
+				maxL = $(window).outerWidth() - $this.outerWidth(),
+				maxT = $(window).outerHeight() - $this.outerHeight();
+			curL = curL < minL ? minL : (curL > maxL ? maxL : curL);
+            curT = curT < minT ? minT : (curT > maxT ? maxT : curT);
+            $this.css({
+                left: curL,
+                top: curT
+            });
+		}
+
+		function up(ev) {
+			$document.off('mousemove', this._MOVE);
+			$document.off('mouseup', this._UP);
+		} -->
+    <!-- </script> -->
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>定时器动画</title>
+	<!-- IMPORT CSS -->
+	<link rel="stylesheet" href="css/reset.min.css">
+	<style>
+		.nezha {
+			position: absolute;
+			top: 0;
+			left: 0px;
+			width: 100px;
+			border: 1px solid lightcoral;
+			/* 设置过渡动画 */
+			/* transition: 1s linear; */
+		}
+	</style>
+</head>
+
+<body>
+	<img src="images/nz1.jpg" alt="" class="nezha">
+
+	<!-- IMPORT JS -->
+	<script src="jquery-1.11.3.min.js"></script>
+	<!-- JQ -->
+	<script>
+		/*
+		 * animate:JQ中实现的动画库 
+		 *   $元素.animate(目标样式,运动时间,运动方式,运动完执行的函数)
+		 * stop:结束当前正在运行的动画,从现有的位置开始继续新的动画
+		 * finish:也是结束当前正在运行的动画,和STOP的区别是,FINSH是结束后快速运动到动画的结束位置，在开启新的动画
+		 * 
+		 * 快捷动画
+		 *   show/hide/toggle  显示/隐藏/显示隐藏的切换
+		 *   fadeIn/fadeOut/fadeToggle  渐隐渐现
+		 *   slideDown/slideUp/slideToggle 下拉和卷起
+		 *   ...
+		 */
+		// let $nezha = $('.nezha'),
+		// 	$window = $(window),
+		// 	targetL = $window.outerWidth() - $nezha.outerWidth(),
+		// 	targetT = $window.outerHeight() - $nezha.outerHeight();
+		// $nezha.click(function () {
+		// 	// $nezha.hide(1000); //=>"slow" / "fast" / 具体时间
+		// 	// $nezha.fadeOut(1000);
+		// 	// $nezha.slideUp(1000);
+		// });
+
+		/* $nezha.stop().animate({
+			top: targetT,
+			left: targetL
+		}, 2000, 'linear', () => {
+			$nezha.css('transform', 'rotate(180deg)');
+		}); */
+	</script>
+
+	<!-- 多方向，规定时间，匀速动画 -->
+	<script>
+		/* let nezha = document.querySelector('.nezha'),
+			targetL = document.documentElement.clientWidth - nezha.offsetWidth,
+			targetT = document.documentElement.clientHeight - nezha.offsetHeight; */
+
+		/* 
+		 * animate:封装一个简易的动画库
+		 *   @params
+		 *      curEle:当前要运动的元素
+		 *      target:目标样式值  对象:{left:xxx,top:xxx}
+		 *      duration:总时间
+		 *      callback:回调函数，动画完成后做什么事
+		 */
+		/* function animate(curEle, target = {}, duration = 1000, callback) {
+			//=>准备T/B/C/D
+			let time = 0,
+				begin = {},
+				change = {};
+			for (let key in target) {
+				begin[key] = parseFloat(getComputedStyle(curEle)[key]);
+				change[key] = target[key] - begin[key];
+			}
+			//=>设置定时器开始运动
+			let timer = setInterval(() => {
+				time += 16.7;
+				//=>边界
+				if (time >= duration) {
+					clearInterval(timer);
+					timer = null;
+					for (let key in target) {
+						curEle['style'][key] = target[key] + 'px';
+					}
+					//=>运动完执行回调函数
+					// callback && callback();
+					typeof callback === "function" ? callback() : null;
+					return;
+				}
+				//=>获取当前方向的样式值
+				for (let key in target) {
+					let cur = time / duration * change[key] + begin[key];
+					curEle['style'][key] = cur + 'px';
+				}
+			}, 16.7);
+		}
+		
+		animate(nezha, {
+			left: targetL,
+			top: targetT
+		}, 2000, () => {
+			nezha.style.transform = "rotate(180deg)";
+		}); */
+
+		/* let time = 0,
+			duration = 1000,
+			beginL = 0,
+			beginT = 0,
+			changeL = targetL - beginL,
+			changeT = targetT - beginT;
+		let timer = setInterval(() => {
+			time += 16.7;
+			if (time >= duration) {
+				nezha.style.left = targetL + 'px';
+				nezha.style.top = targetT + 'px';
+				clearInterval(timer);
+				timer = null;
+				return;
+			}
+			let curL = time / duration * changeL + beginL,
+				curT = time / duration * changeT + beginT;
+			nezha.style.left = curL + 'px';
+			nezha.style.top = curT + 'px';
+		}, 16.7); */
+	</script>
+
+
+	<!-- CSS3动画 -->
+	<script>
+		/* let nezha = document.querySelector('.nezha'),
+			targetL = document.documentElement.clientWidth - nezha.offsetWidth,
+			targetT = document.documentElement.clientHeight - nezha.offsetHeight;
+		nezha.style.transform = `translate(${targetL}px,${targetT}px)`; */
+	</script>
+
+	<!-- 定时器动画 -->
+	<script>
+		/* 定时器动画：限定步长 */
+		 let nezha = document.querySelector('.nezha'),
+			//=>target:目标样式
+			target = document.documentElement.clientWidth - nezha.offsetWidth,
+			//=>step:步长
+			step = 10;
+		//=>设置定时器，让其每间隔17MS走一步（改变LEFT/TRANSFORM:TRANSLATEX）
+		let timer = setInterval(() => {
+			//1.获取当前盒子的位置，在现有的位置上加STEP
+			let curL = parseFloat(window.getComputedStyle(nezha).left);
+			if ((curL + step) >= target) { 
+				//curL >= target 可能出现这样的情况：总长887，每次10，88.7步才能到，88步不够，89步才满足，但是会导致图片回弹一下，所以加一步
+				//=>到达边界（边界判断是在当前位置的基础上加上步长去验证的）
+				nezha.style.left = target + 'px';
+				clearInterval(timer);
+				timer = null;
+				return;
+			}
+			//2.重新给元素设置样式
+			curL += step;
+			nezha.style.left = curL + 'px';
+		}, 17); 
+	</script>
+	<script>
+		/* 
+		 * 定时器动画：限定时间的匀速运动 
+		 *    T:TIME 当前已经运动的时间
+		 *    B:BEGIN 开始位置
+		 *    D:DURATION 总时间
+		 *    C:CHANGE 总距离
+		 * 当前位置 = T/D*C+B
+		 */
+		/* let nezha = document.querySelector('.nezha'),
+			//=>TARGET 目标位置
+			target = document.documentElement.clientWidth - nezha.offsetWidth,
+			//=>BEGIN 起始位置
+			begin = parseFloat(window.getComputedStyle(nezha).left),
+			//=>CHANGE 总距离
+			change = target - begin,
+			//=>DURATION 总时间
+			duration = 1000,
+			//=>TIME 已经运动的时间
+			time = 0;
+		let timer = setInterval(() => {
+			time += 17;
+			if (time >= duration) {
+				nezha.style.left = target + 'px';
+				clearInterval(timer);
+				timer = null;
+				return;
+			}
+			let curL = time / duration * change + begin;
+			// let curL = effect(time, begin, change, duration);
+			nezha.style.left = curL + 'px';
+		}, 17);
+
+		function effect(t, b, c, d) { 
+			if ((t /= d) < (1 / 2.75)) {
+				return c * (7.5625 * t * t) + b;
+			} else if (t < (2 / 2.75)) {
+				return c * (7.5625 * (t -= (1.5 / 2.75)) * t + .75) + b;
+			} else if (t < (2.5 / 2.75)) {
+				return c * (7.5625 * (t -= (2.25 / 2.75)) * t + .9375) + b;
+			} else {
+				return c * (7.5625 * (t -= (2.625 / 2.75)) * t + .984375) + b;
+			}
+		}
+		*/
+	</script>
+
+	<!-- requestAnimationFram -->
+	<script>
+		// https://blog.csdn.net/vhwfr2u02q/article/details/79492303
+		/* function effect(t, b, c, d) { 
+			if ((t /= d) < (1 / 2.75)) {
+				return c * (7.5625 * t * t) + b;
+			} else if (t < (2 / 2.75)) {
+				return c * (7.5625 * (t -= (1.5 / 2.75)) * t + .75) + b;
+			} else if (t < (2.5 / 2.75)) {
+				return c * (7.5625 * (t -= (2.25 / 2.75)) * t + .9375) + b;
+			} else {
+				return c * (7.5625 * (t -= (2.625 / 2.75)) * t + .984375) + b;
+			}
+		}*/
+
+		/* window.requestAnimationFrame：JS中比定时器动画更好的方式（HTML5中提供的）*/
+		/* let nezha = document.querySelector('.nezha'),
+			target = document.documentElement.clientWidth - nezha.offsetWidth,
+			begin = parseFloat(window.getComputedStyle(nezha).left),
+			change = target - begin,
+			duration = 1000,
+			time = 0;
+		function render() {
+			time += 16.7;
+			if (time >= duration) {
+				nezha.style.left = target + 'px';
+				return;
+			}
+			let curL = effect(time, begin, change, duration);
+			nezha.style.left = curL + 'px';
+			window.requestAnimationFrame(render);
+		}
+		window.requestAnimationFrame(render); */
+	</script>
+</body>
+
+</html>

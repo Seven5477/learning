@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>练习</title>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        list-style: none;
+        text-decoration: none;
+    }
+    .inner{
+        width: 300px;
+        height: 420px;
+        margin: 10px auto;
+        background-color: black;
+    }
+    .info{
+        height: 20px;
+        background-color: black;
+        color: #fff;
+        font-size: 13px;
+    }
+    /*input[type="text"]{
+        width: 285px;
+        height: 80px;
+        text-align: right;
+        font: 700 50px/84px Arial;
+        background-color: #ffc107;
+        padding: 0 5px;
+    }*/
+    .show{
+        height: 75px;
+        font-size: 45px;
+        text-align: right;
+        background-color: #ffc107;
+    }
+    ul{
+        padding: 0 0 17px 8px;
+    }
+    li{
+        width: 63px;
+        height: 41px;
+        margin: 17px 10px 0 0;
+        float: left;
+    }
+    li a{
+        display: block;
+        width: 63px;
+        height: 41px;
+        text-align: center;
+        line-height: 41px;
+        color: #fff;
+        background-color: #9e9e9e;
+    }
+    li.btn-1 a{
+        background-color: #795548;
+    }
+    li.btn-2 a{
+        background-color: #ffc107;
+        height: 99px;
+        line-height: 99px;
+    }
+    li.btn-3{
+        width: 136px;
+    }
+    li.btn-3 a{
+        width: 136px;
+    }
+    li a:hover{
+        background-color: #607d8b;
+    }
+</style>
+</head>
+<body>
+    <div class="inner">
+        <!-- 信息 -->
+        <div class="info">
+            <span style="float: right;">This is a Calculator.</span>
+        </div>
+        <!-- 输入显示 -->
+        <!-- <input type="text"> -->
+        <div class="show"></div>
+        <!-- 按键 -->
+        <ul>
+            <li class="btn-1"><a href="javascript:void(0)">c</a></li>
+            <li class="btn-1"><a href="javascript:void(0)">%</a></li>
+            <li class="btn-1"><a href="javascript:void(0)">/</a></li>
+            <li class="btn-1"><a href="javascript:void(0)">*</a></li>
+            <li><a href="javascript:void(0)">7</a></li>
+            <li><a href="javascript:void(0)">8</a></li>
+            <li><a href="javascript:void(0)">9</a></li>
+            <li class="btn-1"><a href="javascript:void(0)">-</a></li>
+            <li><a href="javascript:void(0)">4</a></li>
+            <li><a href="javascript:void(0)">5</a></li>
+            <li><a href="javascript:void(0)">6</a></li>
+            <li class="btn-1"><a href="javascript:void(0)">+</a></li>
+            <li><a href="javascript:void(0)">1</a></li>
+            <li><a href="javascript:void(0)">2</a></li>
+            <li><a href="javascript:void(0)">3</a></li>
+            <li class="btn-2"><a href="javascript:void(0)">=</a></li>
+            <li class="btn-3"><a href="javascript:void(0)">0</a></li>
+            <li><a href="javascript:void(0)">.</a></li>
+        </ul>
+    </div>
+<script type="text/javascript">
+
+var caculateBtn = document.querySelectorAll(".btn-1"),
+    equalBtn = document.querySelector(".btn-2"),
+    btnList = document.querySelectorAll("li"),
+    show = document.querySelector(".show"),
+    // numBtn = [],
+    // num = [],
+    // tmp = "",
+    reg = /([\%\/\*\-\+])\1/g;
+    value = 0;
+    show.innerText = "";
+
+// function count(cal) {
+//     num.push(tmp);
+//     tmp = "";
+//     console.log(num)
+//     for(var i = 0; i < num.length; i++) {
+//         // value = parseFloat(num[i]);
+//         value += parseFloat(num[i]);
+//         // value = eval(value + cal + parseFloat(num[i+1]));
+//         // value = value + parseFloat(num[i]);
+        
+//     }
+//     console.log(value);
+//     return value;
+// }
+
+for (var i = 0; i < btnList.length; i++) {
+    btnList[i].index = i;
+    btnList[i].onclick = function () {
+        show.innerText += btnList[this.index].innerText;
+        // switch(this.innerText)
+        // {
+        //     case "c":
+        //         show.innerText = "0";
+        //         break;
+        //     case "%":
+        //         count("%");
+        //         break;
+        //     case "/":
+        //         count("/");
+        //         break;
+        //     case "x":
+        //         count("*");
+        //         break;
+        //     case "-":
+        //         count("-");
+        //         break;
+        //     case "+":
+        //         count("+");
+        //         break;
+        //     default:
+        //         tmp += this.innerText;
+        //         // console.log(tmp)
+        // }
+        // if(reg.test(show.innerText)){
+        //     show.innerText = "error";
+        //     return 0;
+        // }
+        if(reg.test(show.innerText)){
+            show.innerText = "error";
+        }else{
+            if(this.innerText == "="){
+                value = show.innerText.substr(0, show.innerText.length-1);
+                try{
+                    value = eval(value);
+                }
+                catch(e){
+                    show.innerText = "error";
+                }
+                show.innerText = value;
+            }
+        }
+    }
+
+}
+</script>
+</body>
+</html>

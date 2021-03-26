@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+<!-- <script type="text/javascript" src="demo.js"></script> -->
+</head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	ul{
+		list-style: none;
+	}
+	li:nth-of-type(2n){
+		background: yellow;
+	}
+	li:nth-of-type(2n+1){
+		background: green;
+	}
+</style>
+<body>
+	<!-- <ul>
+		<li>a</li>
+		<li>a</li>
+		<li>a</li>
+		<li>a</li>
+	</ul> -->
+<script type="text/javascript">
+		
+function findAllOccurrences(arr, target) {
+    var a =[];
+    var pos = arr.indexOf(target);
+    while(pos > -1){
+        a.push(pos);
+        pos = arr.indexOf(target,pos + 1);
+    }
+    return a;
+}
+function toJSONStr(str) {
+	var target = [];
+
+	for(var i = 0; i < str.length; i++){ /*把字符串转化为数组*/
+		target.push(str[i]);
+	}
+
+	var start = findAllOccurrences(str,'{'); /*找出{的所有位置*/	
+	var end = findAllOccurrences(str,'}'); /*找出}的所有位置*/
+	var endLen = end.length;
+
+	var jsonStr = target.slice(start[0], end[endLen-1]+1); /*提取第一个{到最后一个}的部分*/
+	
+	jsonStr = jsonStr.join(""); /*转化为字符串*/
+	jsonStr = JSON.parse(jsonStr); /*转化为json格式*/
+
+	return jsonStr;
+}
+
+var str = "Access-Control-Allow-Origin:*"+"\n" +
+"Content-Type:application/json"+"\n" +
+"{\"jsonrpc\":\"2.0\",\"result\":{\"err_code\":0,\"access_type\":2,\"access_list\":[{\"url\":\"www.baidu.com\",\"order_num\":1},{\"url\":\"www/bai.com\",\"order_num\":2}]},\"id\":1}HTTP/1.0 404 Not Found"+"\n" +
+
+"Date: Sat, 11 Apr 2020 17:15:59 GMT"+"\n" +
+"Server: Boa/0.94.13"+"\n" +
+"Connection: close"+"\n" +
+"Content-Type: text/html; charset=ISO-8859-1"+"\n" +"\n" +
+
+"<HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>"+"\n" +
+"<BODY><H1>404 Not Found</H1>"+"\n" +
+"The requested URL /rpc was not found on this server."+"\n" +
+"</BODY></HTML>";
+var str2 = "Access-Control-Allow-Origin:*"+"\n" +
+"Content-Type:application/json"+"\n" +
+"{\"jsonrpc\":\"2.0\",\"result\":{\"err_code\":0,\"waite_time\":0,\"message\":\" \",\"ssid\":\"BWR-xxxx\",\"key\":\"963852741\",\"encryption\":\"wpa/wpa2-psk\"},\"id\":1}HTTP/1.0 404 Not Found"+"\n" +
+
+"Date: Sat, 11 Apr 2020 17:15:59 GMT"+"\n" +
+"Server: Boa/0.94.13"+"\n" +
+"Connection: close"+"\n" +
+"Content-Type: text/html; charset=ISO-8859-1"+"\n" +"\n" +
+
+"<HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>"+"\n" +
+"<BODY><H1>404 Not Found</H1>"+"\n" +
+"The requested URL /rpc was not found on this server."+"\n" +
+"</BODY></HTML>";
+
+// var jsonStr = toJSONStr(str2);
+
+
+var jsonStr = toJSONStr(str);
+
+</script>
+
+</body>
+</html>

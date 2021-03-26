@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				
+			}
+			ul,li{
+				list-style: none;
+			}
+			.clearfix::after{
+				display: block;
+				content: "";
+				clear: both;
+			}
+			ul{
+				width: 1200px;
+				margin: 100px auto 0;
+				display: flex;
+				justify-content: space-between;
+				font-size: 0;
+			}
+			li{
+				width: 300;
+				position: relative;
+				overflow: hidden;
+			}
+				
+			img{
+				width: 300px;
+				height: 180px;
+			}
+			.lay{
+				background-color: rgba(0,0,0,.6);
+				position: absolute;
+				top: 0;
+			}
+			.lay p{
+				font-size: 20px;
+				color: #FFFFFF;
+				display: none;
+				text-align: center;
+				
+			/* 	position: absolute; */
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="clearfix">
+			<li>
+				<img src="1.jpg" >
+				<div class="lay">
+					<p>good</p>
+				</div>
+			</li>
+			<li>
+				<img src="2.jpg" >
+				<div class="lay">
+					<p>luck</p>
+				</div>
+			</li>
+			<li>
+				<img src="0.jpg" >
+				<div class="lay">
+					<p>你好，世界</p>
+				</div>
+			</li>
+		</ul>
+	</body>
+	<script src="../jquery-1.11.3.min.js"></script><!-- 引入jquery -->
+	<script type="text/javascript">
+		$(function(){
+			
+			$("li").on("mouseenter mouseleave",function(ev){
+				var $w=$(this).outerWidth();//读取元素宽高
+				var $h=$(this).outerHeight();
+				var $l=$(this).offset().left;//读取偏移量
+				var $t=$(this).offset().top;
+				var $x=ev.pageX;//获取鼠标相对于浏览器的位置
+				var $y=ev.pageY;
+				
+				var $lay=$(this).find(".lay");
+				$lay.css({"width":$w,"height":$h});//设置遮罩层的宽高与父级元素一样
+				$lay.find("p").fadeIn();
+				var $ph=$("p").height();//获得P元素的高
+				$lay.find("p").css("margin-top",($h-$ph)/2);//使得文字垂直居中
+				var $k=$h/$w;//得到元素的对角线斜率
+				var $k0=($y-$t-$h/2)/($x-$l-$w/2);//获取鼠标进入时的点与元素中心点的斜率
+				var $dir=null;
+				if($k0<=$k && $k0>=-$k){//当$k0在正负$k之间时说明是从左右两边进出的
+					if($x > $l + $w/2){//当进入的位置大于水平偏移量和宽度的一半时，则是从右侧进出
+						$dir="right";
+					}else{
+						$dir="left";
+					}
+					
+				}else{//判断上下
+					if($y > $t+$h/2){//当进入的位置大于垂直偏移量和高度的一半时，则是从下方进出
+						$dir="bottom";
+					}else{
+						$dir="top";
+					}
+				}
+				if(ev.type=="mouseenter"){
+					switch($dir){
+						case "right"://右侧进入，定位需定到右侧
+						$lay.css({"left":$w,"top":0});
+						break;
+						case "left"://左侧进入定位需订到左侧
+						$lay.css({"left":-$w,"top":0});
+						break;
+						case "top":
+						$lay.css({"left":0,"top":-$h});
+						break;
+						case "bottom":
+						$lay.css({"left":0,"top":$h});
+						break;
+					}
+					$lay.stop().animate({"left":0,"top":0},1000);
+				}
+				if(ev.type=="mouseleave"){
+					switch($dir){
+						case "left":
+						$lay.stop().animate({"left":-$w,"top":0},1000);
+						break;
+						case "right":
+						$lay.stop().animate({"left":$w,"top":0},1000);
+						break;
+						case "top":
+						$lay.stop().animate({"left":0,"top":-$h},1000);
+						break;
+						case "bottom":
+						$lay.stop().animate({"left":0,"top":$h},1000);
+						break;
+				}
+				}
+			})
+			
+			
+			
+		})
+	</script>
+</html>
+

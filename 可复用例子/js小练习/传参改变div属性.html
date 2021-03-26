@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>练习</title>
+<!-- <script type="text/javascript" src="demo.js"></script> -->
+</head>
+<style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    button{
+        padding: 3px;
+        text-align: center;
+    }
+    .inner{
+        width: 300px;
+        margin: 0 auto;
+    }
+    label {
+        display: inline-block;
+        width: 5em;
+        text-align: right;
+    }
+    input{
+        height: 20px;
+        margin: 10px;
+    }
+    button{
+        margin: 10px;
+    }
+    .wrapper{
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+</style>
+<body>
+    <div class="inner">
+        <label>属性名:</label>
+        <input type="text" value="background">
+        <label>属性值:</label>
+        <input type="text" value="blue">
+        <label></label>
+        <button>确定</button>
+        <button>重置</button>
+    </div>
+    <div class="wrapper"></div>
+<script type="text/javascript">
+
+var inputList = document.querySelectorAll("input"),
+    btnList = document.querySelectorAll("button"),
+    wrapper = document.querySelector(".wrapper");
+var arr = [];
+
+function changeStyle(elem, key, value){
+    elem.style[key] = value;
+}
+btnList[0].onclick = function () {
+    for (var i = 0; i < inputList.length; i++) {
+        arr[i] = inputList[i].value;
+    }
+    changeStyle(wrapper, arr[0], arr[1]);
+}
+btnList[1].onclick = function () {
+    wrapper.removeAttribute("style"); //移除style属性
+}
+
+
+</script>
+
+</body>
+</html>
